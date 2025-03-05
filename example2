@@ -1,0 +1,55 @@
+public class BankAccount {
+    private double balance;
+
+    // Constructor to initialize balance
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    // Deposit money into account
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    // Withdraw money from account
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        }
+    }
+
+    // Get current balance
+    public double getBalance() {
+        return balance;
+    }
+}
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BankAccountTest {
+    // Test deposit method
+    @Test
+    public void testDeposit() {
+        BankAccount account = new BankAccount(100);  // Initial balance 100
+        account.deposit(50);  // Deposit 50
+        assertEquals(150, account.getBalance());  // Balance should now be 150
+    }
+
+    // Test withdraw method
+    @Test
+    public void testWithdraw() {
+        BankAccount account = new BankAccount(100);  // Initial balance 100
+        account.withdraw(50);  // Withdraw 50
+        assertEquals(50, account.getBalance());  // Balance should now be 50
+    }
+
+    // Test withdraw with insufficient funds
+    @Test
+    public void testWithdrawInsufficientFunds() {
+        BankAccount account = new BankAccount(50);  // Initial balance 50
+        account.withdraw(100);  // Try to withdraw 100 (not enough)
+        assertEquals(50, account.getBalance());  // Balance should stay 50
+    }
+}
